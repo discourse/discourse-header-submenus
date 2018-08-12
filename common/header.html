@@ -1,0 +1,253 @@
+<div id='top-menu' class='top-menu'>
+  <div class='wrap'></div>
+</div>
+
+<script type="text/discourse-plugin" version="0.8.23">
+/* based on Cory LaViska's jQuery Dropdown:
+ * https://github.com/claviska/jquery-dropdown
+ *
+ * @license: MIT license: http://opensource.org/licenses/MIT
+*/
+if (jQuery)
+  (function($) {
+    $.extend($.fn, {
+      dDropdown: function(method, data) {
+        switch (method) {
+          case "show":
+            show(null, $(this));
+            return $(this);
+          case "hide":
+            hide();
+            return $(this);
+          case "attach":
+            return $(this).attr("data-d-dropdown", data);
+          case "detach":
+            hide();
+            return $(this).removeAttr("data-d-dropdown");
+          case "disable":
+            return $(this).addClass("d-dropdown-disabled");
+          case "enable":
+            hide();
+            return $(this).removeClass("d-dropdown-disabled");
+        }
+      }
+    });
+
+    function show(event, object) {
+      var trigger = event ? $(this) : object,
+        dDropdown = $(trigger.attr("data-d-dropdown")),
+        isOpen = trigger.hasClass("d-dropdown-open");
+
+      if (event) {
+        if ($(event.target).hasClass("d-dropdown-ignore")) return;
+
+        event.preventDefault();
+        event.stopPropagation();
+      } else {
+        if (
+          trigger !== object.target &&
+          $(object.target).hasClass("d-dropdown-ignore")
+        )
+          return;
+      }
+      hide();
+
+      if (isOpen || trigger.hasClass("d-dropdown-disabled")) return;
+
+      trigger.addClass("d-dropdown-open");
+      dDropdown.data("d-dropdown-trigger", trigger).show();
+
+      position();
+
+      dDropdown.trigger("show", {
+        dDropdown: dDropdown,
+        trigger: trigger
+      });
+    }
+
+    function hide(event) {
+      var targetGroup = event
+        ? $(event.target)
+            .parents()
+            .addBack()
+        : null;
+
+      if (targetGroup && targetGroup.is(".d-dropdown")) {
+        if (targetGroup.is(".d-dropdown-menu")) {
+          if (!targetGroup.is("A")) return;
+        } else {
+          return;
+        }
+      }
+
+      $(document)
+        .find(".d-dropdown:visible")
+        .each(function() {
+          var dDropdown = $(this);
+          dDropdown
+            .hide()
+            .removeData("d-dropdown-trigger")
+            .trigger("hide", { dDropdown: dDropdown });
+        });
+
+      $(document)
+        .find(".d-dropdown-open")
+        .removeClass("d-dropdown-open");
+    }
+
+    function position() {
+      var dDropdown = $(".d-dropdown:visible").eq(0),
+        trigger = dDropdown.data("d-dropdown-trigger"),
+        hOffset = trigger
+          ? parseInt(trigger.attr("data-horizontal-offset") || 0, 10)
+          : null,
+        vOffset = trigger
+          ? parseInt(trigger.attr("data-vertical-offset") || 0, 10)
+          : null;
+
+      if (dDropdown.length === 0 || !trigger) return;
+
+      if (dDropdown.hasClass("d-dropdown-relative")) {
+        dDropdown.css({
+          left: dDropdown.hasClass("d-dropdown-anchor-right")
+            ? trigger.position().left -
+              (dDropdown.outerWidth(true) - trigger.outerWidth(true)) -
+              parseInt(trigger.css("margin-right"), 10) +
+              hOffset
+            : trigger.position().left +
+              parseInt(trigger.css("margin-left"), 10) +
+              hOffset,
+          top:
+            trigger.position().top +
+            trigger.outerHeight(true) -
+            parseInt(trigger.css("margin-top"), 10) +
+            vOffset
+        });
+      } else {
+        dDropdown.css({
+          left: dDropdown.hasClass("d-dropdown-anchor-right")
+            ? trigger.offset().left -
+              (dDropdown.outerWidth() - trigger.outerWidth()) +
+              hOffset
+            : trigger.offset().left + hOffset,
+          top: trigger.offset().top + trigger.outerHeight() + vOffset
+        });
+      }
+    }
+
+    $(document).on("click.d-dropdown", "[data-d-dropdown]", show);
+    $(document).on("click.d-dropdown", hide);
+    $(document).on("scroll", hide);
+    $(window).on("resize", position);
+  })(jQuery);
+</script>
+
+    
+<script type="text/discourse-plugin" version="0.8.23">
+let sec = "",
+  seg = "",
+  rawMain = "",
+  mainUl = "";
+
+sec = $.map(settings.Menu_items.split("|"), $.trim);
+seg = $.map(settings.Submenu_items.split("|"), $.trim);
+rtl = settings.RTL_support;
+
+if (rtl) {
+  rtlClass = "d-dropdown-anchor-right";
+} else {
+  rtlClass = "";
+}
+
+$.each(sec, function() {
+  var sec = $.map(this.split(","), $.trim);
+  rawMain +=
+    '<a data-d-dropdown="#' +
+    sec[0] +
+    '" class="' +
+    sec[3] +
+    '" title="' +
+    sec[2] +
+    '"><i class="fa d-icon fa-' +
+    sec[1] +
+    '"></i>' +
+    sec[0] +
+    '<i class="fa fa-caret-down d-icon d-icon-caret-down"></i></a><div id="' +
+    sec[0] +
+    '" class="d-dropdown ' +
+    rtlClass +
+    '"><ul class="d-dropdown-menu"></ul></div>';
+});
+
+$("#top-menu .wrap").html(rawMain);
+
+$.each(sec, function() {
+  var sec = $.map(this.split(","), $.trim);
+  mainUl = $("#" + sec[0] + " ul").html();
+
+  $.each(seg, function() {
+    var seg = $.map(this.split(","), $.trim),
+      itemClass = seg[1].replace(/\s+/g, "-").toLowerCase();
+
+    if (sec[0] == seg[0]) {
+      if (seg[1] == "divider") {
+        mainUl += "<li class='divider'></li>";
+        return $("#" + sec[0] + " ul").html(mainUl);
+      }
+
+      if (seg[2] == null || seg[2] == " ") {
+        seg[2] = "";
+      }
+
+      if (seg[4] == "blank") {
+        seg[4] = "_blank";
+        itemClass += " blank ";
+      } else {
+        seg[4] = "_self";
+      }
+
+      if (seg[5] == null || seg[5] == " ") {
+        seg[5] = "";
+      }
+
+      mainUl +=
+        '<li class="submenu-item' +
+        itemClass +
+        '"><a target="' +
+        seg[4] +
+        '" title="' +
+        seg[5] +
+        '" class="submenu-link" href="' +
+        seg[3] +
+        '"><i class="fa d-icon fa-' +
+        seg[2] +
+        '"></i>' +
+        seg[1] +
+        "</li>";
+      $("#" + sec[0] + " ul").html(mainUl);
+    }
+  });
+});
+
+$(function() {
+  $(".d-dropdown-menu li:not(.blank) a").click(function() {
+    require("discourse/lib/url").default.routeTo(
+      $(event.currentTarget).attr("href")
+    );
+    $(document)
+      .find(".d-dropdown:visible")
+      .each(function() {
+        var dDropdown = $(this);
+        dDropdown
+          .hide()
+          .removeData("d-dropdown-trigger")
+          .trigger("hide", { dDropdown: dDropdown });
+      });
+    $(document)
+      .find(".d-dropdown-open")
+      .removeClass("d-dropdown-open");
+    return false;
+  });
+});
+
+</script>
