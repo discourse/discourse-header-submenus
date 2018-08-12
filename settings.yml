@@ -9,7 +9,7 @@ Submenu_items:
   description:
     en: 'Add submenu items. One item per line in this order: Parent, text, icon, URL, target, title.<br><b>Parent:</b> the name of the parent menu item which this submenu item show under. Use the `text` value from the list above<br><b>Text:</b> the text that shows for this submenu item.<br><b>Icon:</b> the icon for this submenu item, use `none` if no icon is needed<br><b>URL:</b> the path this menu item links to. You can use relative paths as well.<br><b>Target:</b> Choose whether this item will open in a new tab or in the same tab. Use `blank` to open the link in a new tab, or use `self` to open it in the same tab.<br><b>Title:</b> the text that shows when the item is hovered.<br><b>Dividers:</b> You can also add dividers between submenu items. To add a divider user `parent, divider`'
 Show_caret:
-  default: false
+  default: true
   description:
     en: 'Show caret icon next to menu items'
 Invert_position:
