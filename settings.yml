@@ -1,0 +1,22 @@
+Menu_items:
+  type: list
+  default: "Products|Promotions|Sales|Questions"
+  description:
+    en: 'Add menu items. One item per line in this order: Text, icon, title, view.<br><b>Text:</b> what appears on the menu.<br><b>Icon:</b> the icon displayed next to the item. If you do not want to use an icon, use `none`<br><b>Title:</b> the text that appears when the item is hovered.<br><b>View:</b> Choose what devices the item appears on. `vdm` appears on both desktop and mobile, `vdo` appears on desktops only, `vmo` appears on mobiles only. Due to lack of space, it is reccomended to not add more than 3-4 items on mobile.'
+Submenu_items:
+  type: list
+  default: "1,item 1, heart, https://google.com|1,item 2, music, https://bing.com"
+  description:
+    en: 'Add submenu items. One item per line in this order: Parent, text, icon, URL, target, title.<br><b>Parent:</b> the name of the parent menu item which this submenu item show under. Use the `text` value from the list above<br><b>Text:</b> the text that shows for this submenu item.<br><b>Icon:</b> the icon for this submenu item, use `none` if no icon is needed<br><b>URL:</b> the path this menu item links to. You can use relative paths as well.<br><b>Target:</b> Choose whether this item will open in a new tab or in the same tab. Use `blank` to open the link in a new tab, or use `self` to open it in the same tab.<br><b>Title:</b> the text that shows when the item is hovered.<br><b>Dividers:</b> You can also add dividers between submenu items. To add a divider user `parent, divider`'
+Show_caret:
+  default: false
+  description:
+    en: 'Show caret icon next to menu items'
+Invert_position:
+  default: false
+  description:
+    en: 'Display menu items on the opposite side of the screen'
+RTL_support:
+  default: false
+  description:
+    en: 'Enable RTL support'
