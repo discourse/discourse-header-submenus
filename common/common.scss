@@ -1,7 +1,71 @@
 @import "common/foundation/variables";
 
+$menu-background: null !default;
+$menu-item-color: null !default;
+$menu-item-active-background: null !default;
+$menu-item-active-color: null !default;
+$submenu-background: null !default;
+$submenu-item-color: null !default;
+$submenu-item-hover-background: null !default;
+$submenu-item-hover-color: null !default;
+$divider-color: null !default;
+
+@if $Menu_background != "" {
+  $menu-background: #{$Menu_background};
+} @else {
+  $menu-background: $primary;
+}
+
+@if $Menu_item_color != "" {
+  $menu-item-color: #{$Menu_item_color};
+} @else {
+  $menu-item-color: $secondary;
+}
+
+@if $Menu_item-active_background != "" {
+  $menu-item-active-background: #{$Menu_item_active_background};
+} @else {
+  $menu-item-active-background: $primary-low;
+}
+
+@if $Menu_item_active_color != "" {
+  $menu-item-active-color: #{$Menu_item_active_color};
+} @else {
+  $menu-item-active-color: $primary;
+}
+
+@if $Submenu_background != "" {
+  $submenu-background: #{$Submenu_background};
+} @else {
+  $submenu-background: $secondary;
+}
+
+@if $Submenu_item_color != "" {
+  $submenu-item-color: #{$Submenu_item_color};
+} @else {
+  $submenu-item-color: $primary;
+}
+
+@if $Submenu_item_hover_background != "" {
+  $submenu-item-hover-background: #{$Submenu_item_hover_background};
+} @else {
+  $submenu-item-hover-background: $tertiary-low;
+}
+
+@if $Submenu_item_hover_color != "" {
+  $submenu-item-hover-color: #{$Submenu_item_hover_color};
+} @else {
+  $submenu-item-hover-color: $primary;
+}
+
+@if $Divider_color != "" {
+  $divider-color: #{$Divider_color};
+} @else {
+  $divider-color: $primary-low;
+}
+
 .top-menu {
-  background: $primary;
+  background: $menu-background;
 
   .wrap {
     display: flex;
@@ -13,7 +77,7 @@
   }
 
   .wrap > a {
-    color: $secondary;
+    color: $menu-item-color;
     border: none;
     padding: 10px 12px;
     font-size: $font-up-1;
@@ -31,8 +95,8 @@
     }
 
     &.d-dropdown-open {
-      background: $primary-low;
-      color: $primary;
+      background: $menu-item-active-background;
+      color: $menu-item-active-color;
       z-index: z("header") + 2;
     }
   }
@@ -84,7 +148,7 @@
     min-width: 160px;
     max-width: 360px;
     list-style: none;
-    background: $secondary;
+    background: $submenu-background;
     box-shadow: shadow("menu-panel");
     overflow: visible;
     padding: 4px 0;
@@ -100,7 +164,7 @@
 
   .d-dropdown-menu li > a {
     display: block;
-    color: inherit;
+    color: $submenu-item-color;
     text-decoration: none;
     line-height: 18px;
     padding: 3px 15px;
@@ -108,7 +172,7 @@
     white-space: nowrap;
 
     &:hover {
-      background-color: $tertiary-low;
+      background-color: $submenu-item-hover-background;
       color: inherit;
       cursor: pointer;
     }
@@ -116,7 +180,7 @@
 
   .d-dropdown-menu .divider {
     font-size: 1px;
-    border-top: solid 1px $primary-low;
+    border-top: solid 1px $divider-color;
     padding: 0;
     margin: 5px 0;
   }
