@@ -1,3 +1,20 @@
 .vmo {
-    display: none;
+  display: none;
+}
+
+@if $Fixed_mode == "true" {
+  .d-dropdown {
+    top: 38.5px !important;
+  }
+  .d-header {
+    margin-top: 38.5px;
+  }
+  .top-menu {
+    position: fixed;
+    width: 100%;
+    z-index: z("header") + 1;
+  }
+  #main-outlet {
+    padding-top: 8.65em;
+  }
 }
