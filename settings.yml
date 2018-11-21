@@ -13,7 +13,7 @@ Svg_icons:
   list_type: 'compact'
   default: 'fa-magic|fa-keyboard-o|fa-money|fa-shopping-cart|fa-lightbulb-o|fa-columns|fa-gift|fa-book|fa-bar-chart|fa-wordpress|fa-wrench|fa-leanpub'
   description: 
-    en: "Include FontAwesome 5 icon classes for each icon used in the lists above."
+    en: "Include FontAwesome icon classes for each icon used in the lists above."
 Fixed_mode:
   default: false
   description:
