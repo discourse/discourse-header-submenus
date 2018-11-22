@@ -144,6 +144,8 @@ if (jQuery)
 
     
 <script type="text/discourse-plugin" version="0.8.23">
+const { iconHTML } = require("discourse-common/lib/icon-library");
+
 let sec = "",
   seg = "",
   rawMain = "",
@@ -161,6 +163,7 @@ if (rtl) {
 
 $.each(sec, function() {
   var sec = $.map(this.split(","), $.trim);
+  var icon = sec[1].length && sec[1] != 'none' ? iconHTML(sec[1]) : '';
   rawMain +=
     '<a data-d-dropdown="#' +
     sec[0] +
@@ -168,11 +171,11 @@ $.each(sec, function() {
     sec[3] +
     '" title="' +
     sec[2] +
-    '"><i class="fa d-icon fa-' +
-    sec[1] +
-    '"></i>' +
-    sec[0] +
-    '<i class="fa fa-caret-down d-icon d-icon-caret-down"></i></a><div id="' +
+    '">' +
+    icon +
+    sec[0] + 
+    iconHTML("caret-down") +
+    '</a><div id="' +
     sec[0] +
     '" class="d-dropdown ' +
     rtlClass +
@@ -198,6 +201,8 @@ $.each(sec, function() {
       if (seg[2] == null || seg[2] == " ") {
         seg[2] = "";
       }
+      
+      var icon = seg[2].length && seg[2] != 'none' ? iconHTML(seg[2]) : '';
 
       if (seg[4] == "blank") {
         seg[4] = "_blank";
@@ -219,9 +224,8 @@ $.each(sec, function() {
         seg[5] +
         '" class="submenu-link" href="' +
         seg[3] +
-        '"><i class="fa d-icon fa-' +
-        seg[2] +
-        '"></i>' +
+        '">' +
+        icon +
         seg[1] +
         "</li>";
       $("#" + sec[0] + " ul").html(mainUl);

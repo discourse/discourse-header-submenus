@@ -8,6 +8,12 @@ Submenu_items:
   default: "Design, Galleries, th, #, blank, Cool galleries for you to look at.|Design, Design process, lightbulb-o, #, blank, Learn the basics.|Design, Blog design, columns, #, blank, What makes for a great blog?|Design, divider|Design, Freebies, gift, #, blank, Everyone likes freebies!|Design, Photoshop tutorials, book, #, blank, Photoshop for beginners.|Design, Design trends, bar-chart, #, blank, Stay on top of the current trends! |Code, Wordpress, wordpress, #, blank, Wordpress code examples|Code, Tools, wrench, #, blank, Tools that will make your life easier!|Code, Tutorials, leanpub, #, blank, Just starting out? We'll guide you through the basics|Business, Blogging, none, #, blank, Why not start a blog?|Business, Social media, none, #, blank, Learn how to leverage Social media and make it work for your business |Business, Make money, none, #, blank, Everyone like to be paid!|Business, Marketing, none, #, blank, No business will survive without customers...Here's how to get'em!|Shop, Vectors, none, #, blank,|Shop, Textures, none, #, blank,|Shop, Brushes, none, #, blank,|Shop, divider|Shop, UI kits, none, #, blank,|Shop, Templates , none, #, blank,|Shop, PSDs, none, #, blank,|More, About us, none, /about, self, Meet the gang!|More, Contact us, none, #, blank, Let's get in touch|More, Terms of Service, none, /tos, self, |More, Privacy policy, none, /privacy, self"
   description:
     en: 'Add submenu items. One item per line in this order: Parent, text, icon, URL, target, title.<br><b>Parent:</b> the name of the parent menu item which this submenu item show under. Use the `text` value from the list above<br><b>Text:</b> the text that shows for this submenu item.<br><b>Icon:</b> the icon for this submenu item, use `none` if no icon is needed<br><b>URL:</b> the path this menu item links to. You can use relative paths as well.<br><b>Target:</b> Choose whether this item will open in a new tab or in the same tab. Use `blank` to open the link in a new tab, or use `self` to open it in the same tab.<br><b>Title:</b> the text that shows when the item is hovered.<br><b>Dividers:</b> You can also add dividers between submenu items. To add a divider user `parent, divider`'
+Svg_icons: 
+  type: 'list'
+  list_type: 'compact'
+  default: 'fa-magic|fa-keyboard-o|fa-money|fa-shopping-cart|fa-lightbulb-o|fa-columns|fa-gift|fa-book|fa-bar-chart|fa-wordpress|fa-wrench|fa-leanpub'
+  description: 
+    en: "Include FontAwesome icon classes for each icon used in the lists above."
 Fixed_mode:
   default: false
   description:
