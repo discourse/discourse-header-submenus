@@ -11,7 +11,7 @@ Submenu_items:
 Svg_icons: 
   type: 'list'
   list_type: 'compact'
-  default: 'fa-magic|fa-keyboard-o|fa-money|fa-shopping-cart|fa-lightbulb-o|fa-columns|fa-gift|fa-book|fa-bar-chart|fa-wordpress|fa-wrench|fab-leanpub'
+  default: 'fa-magic|far-keyboard|far-money-bill-alt|fa-shopping-cart|far-lightbulb|fa-columns|fa-gift|fa-book|far-chart-bar|fab-wordpress|fa-wrench|fab-leanpub'
   description: 
     en: "Include FontAwesome icon classes for each icon used in the lists above."
 Fixed_mode:
