@@ -7,7 +7,7 @@
   }
 }
 
-.top-menu .wrap>a:first-of-type {
+.top-menu .wrap > a:first-of-type {
   margin-left: -10px;
 
   .rtl & {
@@ -17,4 +17,21 @@
 
 .vdo {
   display: none;
+}
+
+.top-menu .wrap {
+  overflow-x: scroll;
+  > a {
+    white-space: nowrap;
+  }
+}
+
+// handles last menu item dropdown position
+.top-menu .wrap > div:last-of-type {
+  left: unset !important;
+  right: 0 !important;
+  .rtl & {
+    left: 0 !important;
+    right: unset !important;
+  }
 }

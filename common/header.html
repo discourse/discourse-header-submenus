@@ -8,250 +8,119 @@
  *
  * @license: MIT license: http://opensource.org/licenses/MIT
 */
-if (jQuery)
-  (function($) {
-    $.extend($.fn, {
-      dDropdown: function(method, data) {
-        switch (method) {
-          case "show":
-            show(null, $(this));
-            return $(this);
-          case "hide":
-            hide();
-            return $(this);
-          case "attach":
-            return $(this).attr("data-d-dropdown", data);
-          case "detach":
-            hide();
-            return $(this).removeAttr("data-d-dropdown");
-          case "disable":
-            return $(this).addClass("d-dropdown-disabled");
-          case "enable":
-            hide();
-            return $(this).removeClass("d-dropdown-disabled");
-        }
-      }
-    });
-
-    function show(event, object) {
-      var trigger = event ? $(this) : object,
-        dDropdown = $(trigger.attr("data-d-dropdown")),
-        isOpen = trigger.hasClass("d-dropdown-open");
-
-      if (event) {
-        if ($(event.target).hasClass("d-dropdown-ignore")) return;
-
-        event.preventDefault();
-        event.stopPropagation();
-      } else {
-        if (
-          trigger !== object.target &&
-          $(object.target).hasClass("d-dropdown-ignore")
-        )
-          return;
-      }
-      hide();
-
-      if (isOpen || trigger.hasClass("d-dropdown-disabled")) return;
-
-      trigger.addClass("d-dropdown-open");
-      dDropdown.data("d-dropdown-trigger", trigger).show();
-
-      position();
-
-      dDropdown.trigger("show", {
-        dDropdown: dDropdown,
-        trigger: trigger
-      });
-    }
-
-    function hide(event) {
-      var targetGroup = event
-        ? $(event.target)
-            .parents()
-            .addBack()
-        : null;
-
-      if (targetGroup && targetGroup.is(".d-dropdown")) {
-        if (targetGroup.is(".d-dropdown-menu")) {
-          if (!targetGroup.is("A")) return;
-        } else {
-          return;
-        }
-      }
-
-      $(document)
-        .find(".d-dropdown:visible")
-        .each(function() {
-          var dDropdown = $(this);
-          dDropdown
-            .hide()
-            .removeData("d-dropdown-trigger")
-            .trigger("hide", { dDropdown: dDropdown });
-        });
-
-      $(document)
-        .find(".d-dropdown-open")
-        .removeClass("d-dropdown-open");
-    }
-
-    function position() {
-      var dDropdown = $(".d-dropdown:visible").eq(0),
-        trigger = dDropdown.data("d-dropdown-trigger"),
-        hOffset = trigger
-          ? parseInt(trigger.attr("data-horizontal-offset") || 0, 10)
-          : null,
-        vOffset = trigger
-          ? parseInt(trigger.attr("data-vertical-offset") || 0, 10)
-          : null;
-
-      if (dDropdown.length === 0 || !trigger) return;
-
-      if (dDropdown.hasClass("d-dropdown-relative")) {
-        dDropdown.css({
-          left: dDropdown.hasClass("d-dropdown-anchor-right")
-            ? trigger.position().left -
-              (dDropdown.outerWidth(true) - trigger.outerWidth(true)) -
-              parseInt(trigger.css("margin-right"), 10) +
-              hOffset
-            : trigger.position().left +
-              parseInt(trigger.css("margin-left"), 10) +
-              hOffset,
-          top:
-            trigger.position().top +
-            trigger.outerHeight(true) -
-            parseInt(trigger.css("margin-top"), 10) +
-            vOffset
-        });
-      } else {
-        dDropdown.css({
-          left: dDropdown.hasClass("d-dropdown-anchor-right")
-            ? trigger.offset().left -
-              (dDropdown.outerWidth() - trigger.outerWidth()) +
-              hOffset
-            : trigger.offset().left + hOffset,
-          top: trigger.offset().top + trigger.outerHeight() + vOffset
-        });
-      }
-    }
-
-    $(document).on("click.d-dropdown", "[data-d-dropdown]", show);
-    $(document).on("click.d-dropdown", hide);
-    $(document).on("scroll", hide);
-    $(window).on("resize", position);
-  })(jQuery);
+jQuery&&function(n){function o(d,t){var o=d?n(this):t,r=n(o.attr("data-d-dropdown")),e=o.hasClass("d-dropdown-open");if(d){if(n(d.target).hasClass("d-dropdown-ignore"))return;d.preventDefault(),d.stopPropagation()}else if(o!==t.target&&n(t.target).hasClass("d-dropdown-ignore"))return;s(),e||o.hasClass("d-dropdown-disabled")||(o.addClass("d-dropdown-open"),r.data("d-dropdown-trigger",o).show(),a(),r.trigger("show",{dDropdown:r,trigger:o}))}function s(d){var t=d?n(d.target).parents().addBack():null;if(t&&t.is(".d-dropdown")){if(!t.is(".d-dropdown-menu"))return;if(!t.is("A"))return}n(document).find(".d-dropdown:visible").each(function(){var d=n(this);d.hide().removeData("d-dropdown-trigger").trigger("hide",{dDropdown:d})}),n(document).find(".d-dropdown-open").removeClass("d-dropdown-open")}function a(){var d=n(".d-dropdown:visible").eq(0),t=d.data("d-dropdown-trigger"),o=t?parseInt(t.attr("data-horizontal-offset")||0,10):null,r=t?parseInt(t.attr("data-vertical-offset")||0,10):null;0!==d.length&&t&&(d.hasClass("d-dropdown-relative")?d.css({left:d.hasClass("d-dropdown-anchor-right")?t.position().left-(d.outerWidth(!0)-t.outerWidth(!0))-parseInt(t.css("margin-right"),10)+o:t.position().left+parseInt(t.css("margin-left"),10)+o,top:t.position().top+t.outerHeight(!0)-parseInt(t.css("margin-top"),10)+r}):d.css({left:d.hasClass("d-dropdown-anchor-right")?t.offset().left-(d.outerWidth()-t.outerWidth())+o:t.offset().left+o,top:t.offset().top+t.outerHeight()+r}))}n.extend(n.fn,{dDropdown:function(d,t){switch(d){case"show":return o(null,n(this)),n(this);case"hide":return s(),n(this);case"attach":return n(this).attr("data-d-dropdown",t);case"detach":return s(),n(this).removeAttr("data-d-dropdown");case"disable":return n(this).addClass("d-dropdown-disabled");case"enable":return s(),n(this).removeClass("d-dropdown-disabled")}}}),n(document).on("click.d-dropdown","[data-d-dropdown]",o),n(document).on("click.d-dropdown",s),n(document).on("scroll",s),n('.top-menu .wrap').on("scroll",s),n(window).on("resize",a)}(jQuery);
 </script>
 
     
 <script type="text/discourse-plugin" version="0.8.23">
-const { iconHTML } = require("discourse-common/lib/icon-library");
 
-let sec = "",
-  seg = "",
+function cleanUp(item) {
+  return item.replace(/\s+/g, "-").toLowerCase();
+}
+
+function exists(item) {
+  return (
+    item &&
+    item.length &&
+    item !== "null" &&
+    item !== "none" &&
+    item !== "None" &&
+    item !== " " &&
+    item !== ""
+  );
+}
+
+const { iconHTML } = require("discourse-common/lib/icon-library"),
+  rtlClass = settings.RTL_support ? "d-dropdown-anchor-right" : "",
+  caret = settings.Show_caret
+    ? iconHTML("caret-down", { class: "header-menu-caret" })
+    : "";
+
+let sec = $.map(settings.Menu_items.split("|"), $.trim),
+  seg = $.map(settings.Submenu_items.split("|"), $.trim),
   rawMain = "",
   mainUl = "";
 
-sec = $.map(settings.Menu_items.split("|"), $.trim);
-seg = $.map(settings.Submenu_items.split("|"), $.trim);
-rtl = settings.RTL_support;
-
-if (rtl) {
-  rtlClass = "d-dropdown-anchor-right";
-} else {
-  rtlClass = "";
-}
-
 $.each(sec, function() {
-  var sec = $.map(this.split(","), $.trim);
-  var icon = sec[1].length && sec[1] != 'none' ? iconHTML(sec[1]) : '';
-  rawMain +=
-    '<a data-d-dropdown="#' +
-    sec[0] +
-    '" class="' +
-    sec[3] +
-    '" title="' +
-    sec[2] +
-    '">' +
-    icon +
-    sec[0] + 
-    iconHTML("caret-down") +
-    '</a><div id="' +
-    sec[0] +
-    '" class="d-dropdown ' +
-    rtlClass +
-    '"><ul class="d-dropdown-menu"></ul></div>';
+  const sec = $.map(this.split(","), $.trim),
+    text = sec[0],
+    trigger = cleanUp(sec[0]),
+    title = sec[2],
+    viewClass = sec[3],
+    icon = exists(sec[1])
+      ? iconHTML(cleanUp(sec[1]), { class: "header-menu-icon" })
+      : "";
+
+  rawMain += `<a
+              data-d-dropdown="#${trigger}"
+              class="${viewClass} ${trigger}"
+              title="${title}">
+                ${icon}
+                ${text}
+                ${caret}
+             </a>
+             <div id="${trigger}" class="d-dropdown ${rtlClass}">
+               <ul class="d-dropdown-menu"></ul>
+             </div>`;
 });
 
 $("#top-menu .wrap").html(rawMain);
 
 $.each(sec, function() {
-  var sec = $.map(this.split(","), $.trim);
-  mainUl = $("#" + sec[0] + " ul").html();
+  let sec = $.map(this.split(","), $.trim),
+    mainUl = "";
 
   $.each(seg, function() {
-    var seg = $.map(this.split(","), $.trim),
-      itemClass = seg[1].replace(/\s+/g, "-").toLowerCase();
+    const seg = $.map(this.split(","), $.trim),
+      parentMenu = cleanUp(sec[0]),
+      parentName = cleanUp(seg[0]),
+      text = seg[1],
+      itemClass =
+        seg[4] === "blank" ? `${cleanUp(seg[1])} blank` : cleanUp(seg[1]),
+      href = seg[3],
+      target = seg[4] === "blank" ? "_blank" : "_self",
+      title = exists(seg[5]) ? seg[5] : "",
+      icon = exists(seg[2])
+        ? iconHTML(cleanUp(seg[2]), { class: "header-menu-icon" })
+        : "";
 
-    if (sec[0] == seg[0]) {
-      if (seg[1] == "divider") {
-        mainUl += "<li class='divider'></li>";
-        return $("#" + sec[0] + " ul").html(mainUl);
+    if (parentName === parentMenu) {
+      if (text === "divider") {
+        mainUl += `<li class='divider'></li>`;
+        return $(`#${parentMenu} ul`).html(mainUl);
       }
 
-      if (seg[2] == null || seg[2] == " ") {
-        seg[2] = "";
-      }
-      
-      var icon = seg[2].length && seg[2] != 'none' ? iconHTML(seg[2]) : '';
-
-      if (seg[4] == "blank") {
-        seg[4] = "_blank";
-        itemClass += " blank ";
-      } else {
-        seg[4] = "_self";
-      }
-
-      if (seg[5] == null || seg[5] == " ") {
-        seg[5] = "";
-      }
-
-      mainUl +=
-        '<li class="submenu-item ' +
-        itemClass +
-        '"><a target="' +
-        seg[4] +
-        '" title="' +
-        seg[5] +
-        '" class="submenu-link" href="' +
-        seg[3] +
-        '">' +
-        icon +
-        seg[1] +
-        "</li>";
-      $("#" + sec[0] + " ul").html(mainUl);
+      mainUl += `<li class="submenu-item ${itemClass}">
+                  <a
+                  target="${target}"
+                  title="${title}"
+                  class="submenu-link"
+                  href="${href}">
+                    ${icon}
+                    ${text}
+                  </a>
+                </li>`;
+      $(`#${parentMenu} ul`).html(mainUl);
     }
   });
 });
 
-$(function() {
-  $(".d-dropdown-menu li:not(.blank) a").click(function() {
-    require("discourse/lib/url").default.routeTo(
-      $(event.currentTarget).attr("href")
-    );
-    $(document)
-      .find(".d-dropdown:visible")
-      .each(function() {
-        var dDropdown = $(this);
-        dDropdown
-          .hide()
-          .removeData("d-dropdown-trigger")
-          .trigger("hide", { dDropdown: dDropdown });
-      });
-    $(document)
-      .find(".d-dropdown-open")
-      .removeClass("d-dropdown-open");
-    return false;
-  });
+$(".d-dropdown-menu li:not(.blank) a").click(function() {
+  require("discourse/lib/url").default.routeTo(
+    $(event.currentTarget).attr("href")
+  );
+  $(document)
+    .find(".d-dropdown:visible")
+    .each(function() {
+      var dDropdown = $(this);
+      dDropdown
+        .hide()
+        .removeData("d-dropdown-trigger")
+        .trigger("hide", { dDropdown: dDropdown });
+    });
+  $(document)
+    .find(".d-dropdown-open")
+    .removeClass("d-dropdown-open");
+  return false;
 });
-
 </script>

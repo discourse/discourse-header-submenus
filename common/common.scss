@@ -69,7 +69,7 @@ $divider-color: null !default;
 
   .wrap {
     display: flex;
-    justify-content: flex-start;
+    align-items: center;
 
     @if $Invert_position == "true" {
       justify-content: flex-end;
@@ -83,6 +83,9 @@ $divider-color: null !default;
     font-size: $font-up-1;
     line-height: $line-height-medium;
     transition: all 0.15s;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
 
     &:first-of-type {
       margin-left: -12px;
@@ -117,24 +120,16 @@ $divider-color: null !default;
     }
   }
 
-  .fa-caret-down {
-    margin-right: 0;
-    margin-left: 5px;
+  .d-icon-caret-down {
     transform: rotate(-90deg);
     transition: transform ease 0.15s;
 
     .rtl & {
-      margin-left: 0;
-      margin-right: 5px;
       transform: rotate(90deg);
-    }
-
-    @if $Show_caret == "false" {
-      display: none;
     }
   }
 
-  .d-dropdown-open .fa-caret-down {
+  .d-dropdown-open .d-icon-caret-down {
     transform: rotate(0);
   }
 }
@@ -163,7 +158,8 @@ $divider-color: null !default;
   }
 
   .d-dropdown-menu li > a {
-    display: block;
+    display: flex;
+    align-items: center;
     color: $submenu-item-color;
     text-decoration: none;
     line-height: 18px;
