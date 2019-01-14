@@ -69,7 +69,6 @@ $divider-color: null !default;
 
   .wrap {
     display: flex;
-    justify-content: flex-start;
     align-items: center;
 
     @if $Invert_position == "true" {
