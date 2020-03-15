@@ -36,8 +36,8 @@ const { iconHTML } = require("discourse-common/lib/icon-library"),
     ? iconHTML("caret-down", { class: "header-menu-caret" })
     : "";
 
-let sec = $.map(settings.Menu_items.split("|"), $.trim),
-  seg = $.map(settings.Submenu_items.split("|"), $.trim),
+let sec = $.map(settings.Menu_items.trim().split(/\n|\|/), $.trim),
+  seg = $.map(settings.Submenu_items.trim().split(/\n|\|/), $.trim),
   rawMain = "",
   mainUl = "";
 
