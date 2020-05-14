@@ -1,183 +1,114 @@
-@import "common/foundation/variables";
-
-$menu-background: null !default;
-$menu-item-color: null !default;
-$menu-item-active-background: null !default;
-$menu-item-active-color: null !default;
-$submenu-background: null !default;
-$submenu-item-color: null !default;
-$submenu-item-hover-background: null !default;
-$submenu-item-hover-color: null !default;
-$divider-color: null !default;
-
-@if $Menu_background != "" {
-  $menu-background: #{$Menu_background};
-} @else {
-  $menu-background: $primary;
+@function fallback($setting, $color) {
+  @if not $setting or $setting == "" {
+    @return $color;
+  } @else {
+    @return $setting;
+  }
 }
 
-@if $Menu_item_color != "" {
-  $menu-item-color: #{$Menu_item_color};
-} @else {
-  $menu-item-color: $secondary;
-}
-
-@if $Menu_item-active_background != "" {
-  $menu-item-active-background: #{$Menu_item_active_background};
-} @else {
-  $menu-item-active-background: $primary-low;
-}
-
-@if $Menu_item_active_color != "" {
-  $menu-item-active-color: #{$Menu_item_active_color};
-} @else {
-  $menu-item-active-color: $primary;
-}
-
-@if $Submenu_background != "" {
-  $submenu-background: #{$Submenu_background};
-} @else {
-  $submenu-background: $secondary;
-}
-
-@if $Submenu_item_color != "" {
-  $submenu-item-color: #{$Submenu_item_color};
-} @else {
-  $submenu-item-color: $primary;
-}
-
-@if $Submenu_item_hover_background != "" {
-  $submenu-item-hover-background: #{$Submenu_item_hover_background};
-} @else {
-  $submenu-item-hover-background: $tertiary-low;
-}
-
-@if $Submenu_item_hover_color != "" {
-  $submenu-item-hover-color: #{$Submenu_item_hover_color};
-} @else {
-  $submenu-item-hover-color: $primary;
-}
-
-@if $Divider_color != "" {
-  $divider-color: #{$Divider_color};
-} @else {
-  $divider-color: $primary-low;
-}
+$item-height: 40px;
+$icon-opacity: 0.7;
 
 .top-menu {
-  background: $menu-background;
+  background: fallback($Menu_background, $primary);
+  width: 100%;
 
-  .wrap {
+  .menu-content {
     display: flex;
     align-items: center;
-
-    @if $Invert_position == "true" {
-      justify-content: flex-end;
-    }
+    justify-content: if($Invert_position == "true", flex-end, flex-start);
   }
 
-  .wrap > a {
-    color: $menu-item-color;
+  .menu-items {
+    display: flex;
+    height: $item-height;
+  }
+
+  .menu-item {
+    position: relative;
+    color: fallback($Menu_item_color, $secondary);
     border: none;
-    padding: 10px 12px;
+    padding: 0 0.5em;
     font-size: $font-up-1;
-    line-height: $line-height-medium;
     transition: all 0.15s;
     display: flex;
     align-items: center;
-    white-space: nowrap;
 
-    &:first-of-type {
-      margin-left: -12px;
-    }
+    &:hover,
+    &:active,
+    &:focus {
+      background: fallback($Menu_item-active_background, $primary-low);
+      color: fallback($Menu-item-active-background, $primary);
+      cursor: default;
+      .d-icon-caret-right {
+        transform: rotate(90deg);
+      }
+      .d-header-dropdown {
+        display: block;
+        top: $item-height;
+        left: 0;
+        z-index: z("header") + 1;
 
-    .rtl & {
-      &:first-of-type {
-        margin-right: -12px;
+        .rtl & {
+          left: unset;
+          right: 0;
+        }
       }
     }
 
-    &.d-dropdown-open {
-      background: $menu-item-active-background;
-      color: $menu-item-active-color;
-      z-index: z("header") + 2;
+    .d-icon-caret-right {
+      margin-left: 0.25em;
+      transition: transform 0.15s ease-in-out;
+
+      .rtl & {
+        margin-left: 0em;
+        margin-right: 0.25em;
+      }
     }
   }
 
-  .d-icon {
-    margin-right: 5px;
-    opacity: 0.7;
-    min-width: 16px;
-    text-align: center;
-
-    &.fa-none {
-      min-width: unset;
-    }
-
-    .rtl & {
-      margin-right: 0;
-      margin-left: 5px;
-    }
+  .d-header-dropdown {
+    position: absolute;
+    display: none;
   }
-
-  .d-icon-caret-down {
-    transform: rotate(-90deg);
-    transition: transform ease 0.15s;
-
-    .rtl & {
-      transform: rotate(90deg);
-    }
-  }
-
-  .d-dropdown-open .d-icon-caret-down {
-    transform: rotate(0);
-  }
-}
-
-.d-dropdown {
-  position: absolute;
-  z-index: z("header") + 1;
-  display: none;
 
   .d-dropdown-menu {
     min-width: 160px;
-    max-width: 360px;
-    list-style: none;
-    background: $submenu-background;
+    background: fallback($Submenu_background, $secondary);
     box-shadow: shadow("menu-panel");
-    overflow: visible;
-    padding: 4px 0;
     margin: 0;
-  }
-
-  .d-dropdown-menu li {
     list-style: none;
-    padding: 0 0;
-    margin: 0;
-    line-height: 18px;
   }
 
-  .d-dropdown-menu li > a {
+  .submenu-link {
     display: flex;
     align-items: center;
-    color: $submenu-item-color;
-    text-decoration: none;
-    line-height: 18px;
-    padding: 3px 15px;
-    margin: 0;
+    color: fallback($Submenu_item_color, $primary);
+    padding: 0.5em;
+    font-size: $font-down-1;
     white-space: nowrap;
 
     &:hover {
-      background-color: $submenu-item-hover-background;
-      color: inherit;
-      cursor: pointer;
+      color: fallback($Submenu_item_hover_color, $primary);
+      background-color: fallback($Submenu_item_hover_background, $tertiary-low);
     }
   }
 
-  .d-dropdown-menu .divider {
-    font-size: 1px;
-    border-top: solid 1px $divider-color;
-    padding: 0;
-    margin: 5px 0;
+  .divider {
+    border-top: solid 1px fallback($Divider_color, $primary-low);
+    margin: 0.25em auto;
+  }
+
+  .d-icon {
+    opacity: $icon-opacity;
+    min-width: 1em;
+    &:not(.d-icon-caret-right) {
+      margin-right: 0.5em;
+
+      .rtl & {
+        margin-right: 0;
+        margin-left: 0.5em;
+      }
+    }
   }
 }

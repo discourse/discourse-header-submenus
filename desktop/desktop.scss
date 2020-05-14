@@ -1,20 +1,30 @@
-.vmo {
-  display: none;
-}
+$item-height: 40px;
 
 @if $Fixed_mode == "true" {
-  .d-dropdown {
-    top: 38.5px !important;
-  }
-  .d-header {
-    margin-top: 38.5px;
-  }
   .top-menu {
     position: fixed;
-    width: 100%;
+    top: 0;
     z-index: z("header") + 1;
   }
-  #main-outlet {
-    padding-top: 8.65em;
+
+  .d-header {
+    top: $item-height;
+    position: fixed;
   }
+
+  #main-outlet {
+    padding-top: calc(5.8572em + #{$item-height});
+  }
+} @else {
+  .d-header {
+    top: $item-height;
+
+    .docked & {
+      top: 0;
+    }
+  }
+}
+
+.vmo {
+  display: none;
 }

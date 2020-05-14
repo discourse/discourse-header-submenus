@@ -1,0 +1,39 @@
+<div id='top-menu' class='top-menu'>
+  <div class='menu-content wrap'>
+    <div class="menu-placeholder">
+      <div class="menu-item-container">
+        <div class="menu-items">
+          {{#each menuItems as |item|}}
+            <a class="menu-item {{item.view}} {{item.className}}" title="{{item.title}}">
+              {{#if item.icon}}
+                {{d-icon item.icon}}
+              {{/if}}
+              {{item.text}}
+              {{#if showCaret}}
+                {{d-icon "caret-right"}}
+              {{/if}}
+              <div class="d-header-dropdown">
+                <ul class="d-dropdown-menu">
+                  {{#each item.childItems as |child|}}
+                    {{#if child.divider}}
+                      <li class='divider'></li>
+                    {{else}}
+                      <li class="submenu-item {{child.className}}">
+                        <a target="{{child.target}}" title="{{child.title}}" class="submenu-link" href="{{child.href}}">
+                          {{#if child.icon}}
+                            {{d-icon child.icon}}
+                          {{/if}}
+                          {{child.text}}
+                        </a>
+                      </li>
+                    {{/if}}
+                  {{/each}}
+                </ul>
+              </div>
+            </a>
+          {{/each}}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

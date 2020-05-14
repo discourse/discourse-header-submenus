@@ -1,37 +1,29 @@
-@import "common/foundation/variables";
+$item-height: 40px;
 
-.top-menu {
-  .wrap > a {
-    font-size: $font-0;
-    padding: 10px 8px;
+.menu-items {
+  display: flex;
+  width: 100%;
+  height: $item-height;
+}
+
+.d-header {
+  margin-top: $item-height;
+  .docked & {
+    margin-top: 0;
   }
 }
 
-.top-menu .wrap > a:first-of-type {
-  margin-left: -10px;
+.menu-item-container {
+  overflow-x: scroll;
+  height: 100vh;
+}
 
-  .rtl & {
-    margin-right: -10px;
-  }
+.menu-placeholder {
+  height: $item-height;
+  position: relative;
+  width: 100%;
 }
 
 .vdo {
   display: none;
-}
-
-.top-menu .wrap {
-  overflow-x: scroll;
-  > a {
-    white-space: nowrap;
-  }
-}
-
-// handles last menu item dropdown position
-.top-menu .wrap > div:last-of-type {
-  left: unset !important;
-  right: 0 !important;
-  .rtl & {
-    left: 0 !important;
-    right: unset !important;
-  }
 }
