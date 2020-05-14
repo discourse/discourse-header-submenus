@@ -24,6 +24,8 @@ $item-height: 40px;
   width: 100%;
 }
 
-.vdo {
-  display: none;
+.top-menu {
+  .menu-item.vdo {
+    display: none;
+  }
 }

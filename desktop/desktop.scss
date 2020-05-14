@@ -25,6 +25,8 @@ $item-height: 40px;
   }
 }
 
-.vmo {
-  display: none;
+.top-menu {
+  .menu-item.vmo {
+    display: none;
+  }
 }
