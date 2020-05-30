@@ -1,11 +1,5 @@
 $item-height: 40px;
 
-.menu-items {
-  display: flex;
-  width: 100%;
-  height: $item-height;
-}
-
 .d-header {
   margin-top: $item-height;
   .docked & {
@@ -16,6 +10,14 @@ $item-height: 40px;
 .menu-item-container {
   overflow-x: scroll;
   height: 100vh;
+  pointer-events: none;
+
+  .menu-items {
+    display: flex;
+    width: 100%;
+    height: $item-height;
+    pointer-events: auto;
+  }
 }
 
 .menu-placeholder {
