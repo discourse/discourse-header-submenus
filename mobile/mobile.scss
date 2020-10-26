@@ -1,12 +1,5 @@
 $item-height: 40px;
 
-.d-header {
-  margin-top: $item-height;
-  .docked & {
-    margin-top: 0;
-  }
-}
-
 .menu-item-container {
   overflow-x: scroll;
   height: 100vh;
