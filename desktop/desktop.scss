@@ -7,21 +7,12 @@ $item-height: 40px;
     z-index: z("header") + 1;
   }
 
-  .d-header {
+  .d-header-wrap {
     top: $item-height;
-    position: fixed;
   }
 
   #main-outlet {
-    padding-top: calc(5.8572em + #{$item-height});
-  }
-} @else {
-  .d-header {
-    top: $item-height;
-
-    .docked & {
-      top: 0;
-    }
+    padding-top: calc(1.8em + #{$item-height});
   }
 }
 
