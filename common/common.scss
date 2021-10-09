@@ -39,7 +39,7 @@ $icon-opacity: 0.7;
     &:active,
     &:focus {
       background: fallback($Menu_item-active_background, $primary-low);
-      color: fallback($Menu-item-active-background, $primary);
+      color: fallback($Menu-item-active-color, $primary);
       cursor: default;
       .d-icon-caret-right {
         transform: rotate(90deg);
