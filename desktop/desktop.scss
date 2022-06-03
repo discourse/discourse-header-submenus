@@ -1,10 +1,15 @@
 $item-height: 40px;
 
 @if $Fixed_mode == "true" {
-  .top-menu {
+  .d-top-menu {
     position: fixed;
     top: 0;
     z-index: z("header") + 1;
+
+    &__item.vmo {
+      //changing vdo classname is out of scope, but would ideally be a modifier so -vmo
+      display: none;
+    }
   }
 
   .d-header-wrap {
@@ -13,11 +18,5 @@ $item-height: 40px;
 
   #main-outlet {
     padding-top: calc(1.8em + #{$item-height});
-  }
-}
-
-.top-menu {
-  .menu-item.vmo {
-    display: none;
   }
 }

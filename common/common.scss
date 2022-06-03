@@ -9,22 +9,22 @@
 $item-height: 40px;
 $icon-opacity: 0.7;
 
-.top-menu {
+.d-top-menu {
   background: fallback($Menu_background, $primary);
   width: 100%;
 
-  .menu-content {
+  &__content {
     display: flex;
     align-items: center;
     justify-content: if($Invert_position == "true", flex-end, flex-start);
   }
 
-  .menu-items {
+  &__items {
     display: flex;
     height: $item-height;
   }
 
-  .menu-item {
+  &__item {
     position: relative;
     color: fallback($Menu_item_color, $secondary);
     border: none;
@@ -44,6 +44,7 @@ $icon-opacity: 0.7;
       .d-icon-caret-right {
         transform: rotate(90deg);
       }
+
       .d-header-dropdown {
         display: block;
         top: $item-height;
@@ -70,18 +71,19 @@ $icon-opacity: 0.7;
         }
       }
     }
+  }
 
-    .d-icon-caret-right {
-      margin-left: 0.25em;
-      transition: transform 0.15s ease-in-out;
+  .d-icon-caret-right {
+    //margin-left: 0.25em; //ideally, this kind of tiny tweaks can be done by utility classes
+    transition: transform 0.15s ease-in-out;
 
-      .rtl & {
-        margin-left: 0em;
-        margin-right: 0.25em;
-      }
+    .rtl & {
+      margin-left: 0em;
+      margin-right: 0.25em;
     }
   }
 
+  //existing components leave as-is
   .d-header-dropdown {
     position: absolute;
     display: none;
@@ -95,7 +97,7 @@ $icon-opacity: 0.7;
     list-style: none;
   }
 
-  .submenu-link {
+  &__submenu-link {
     display: flex;
     align-items: center;
     color: fallback($Submenu_item_color, $primary);
@@ -109,11 +111,12 @@ $icon-opacity: 0.7;
     }
   }
 
-  .divider {
+  &__divider {
     border-top: solid 1px fallback($Divider_color, $primary-low);
     margin: 0.25em auto;
   }
 
+  //special case
   .d-icon {
     opacity: $icon-opacity;
     min-width: 1em;

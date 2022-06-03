@@ -1,26 +1,27 @@
 $item-height: 40px;
 
-.menu-item-container {
-  overflow-x: scroll;
-  height: 100vh;
-  pointer-events: none;
+.d-top-menu {
+  &__item-container {
+    overflow-x: scroll;
+    height: 100vh;
+    pointer-events: none;
+  }
 
-  .menu-items {
+  &__items {
     display: flex;
     width: 100%;
     height: $item-height;
     pointer-events: auto;
   }
-}
 
-.menu-placeholder {
-  height: $item-height;
-  position: relative;
-  width: 100%;
-}
-
-.top-menu {
-  .menu-item.vdo {
+  &__item.vdo {
+    //changing vdo classname is out of scope, but would ideally be a modifier so -vdo
     display: none;
+  }
+
+  &__placeholder {
+    height: $item-height;
+    position: relative;
+    width: 100%;
   }
 }
