@@ -4,7 +4,7 @@ const getClassName = text => {
 };
 
 export default {
-  setupComponent(args, component) {
+  setupComponent() {
     try {
       const splitMenuItems = settings.Menu_items.split("|").filter(Boolean);
       const splitSubmenuItems = settings.Submenu_items.split("|").filter(
@@ -36,7 +36,7 @@ export default {
         const target = fragments[4] === "blank" ? "_blank" : "";
         const title = fragments[5];
 
-        const submenItem = {
+        const submenuItem = {
           parent,
           text,
           className,
@@ -45,7 +45,7 @@ export default {
           target,
           title
         };
-        SubmenuItemsArray.push(submenItem);
+        SubmenuItemsArray.push(submenuItem);
       });
 
       splitMenuItems.forEach(item => {
@@ -81,8 +81,9 @@ export default {
         showCaret
       });
     } catch (error) {
-      console.error(error);
+      // eslint-disable-next-line no-console
       console.error(
+        error,
         "There's an issue in the Header Submenus Component. Check if your settings are entered correctly"
       );
     }
