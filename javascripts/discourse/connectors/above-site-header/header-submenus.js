@@ -1,28 +1,27 @@
 // Used instead of dasherize for backwards compatibility with stable
-const getClassName = text => {
+const getClassName = (text) => {
   return text.toLowerCase().replace(/\s/g, "-");
 };
 
 export default {
-  setupComponent(args, component) {
+  setupComponent() {
     try {
       const splitMenuItems = settings.Menu_items.split("|").filter(Boolean);
-      const splitSubmenuItems = settings.Submenu_items.split("|").filter(
-        Boolean
-      );
+      const splitSubmenuItems =
+        settings.Submenu_items.split("|").filter(Boolean);
 
       const menuItemsArray = [];
       const SubmenuItemsArray = [];
 
-      splitSubmenuItems.forEach(item => {
-        const fragments = item.split(",").map(fragment => fragment.trim());
+      splitSubmenuItems.forEach((item) => {
+        const fragments = item.split(",").map((fragment) => fragment.trim());
         const parent = fragments[0].toLowerCase();
         const text = fragments[1];
 
         if (text.toLowerCase() === "divider") {
           const divider = {
             parent,
-            divider: true
+            divider: true,
           };
           return SubmenuItemsArray.push(divider);
         }
@@ -36,20 +35,20 @@ export default {
         const target = fragments[4] === "blank" ? "_blank" : "";
         const title = fragments[5];
 
-        const submenItem = {
+        const submenuItem = {
           parent,
           text,
           className,
           icon,
           href,
           target,
-          title
+          title,
         };
-        SubmenuItemsArray.push(submenItem);
+        SubmenuItemsArray.push(submenuItem);
       });
 
-      splitMenuItems.forEach(item => {
-        const fragments = item.split(",").map(fragment => fragment.trim());
+      splitMenuItems.forEach((item) => {
+        const fragments = item.split(",").map((fragment) => fragment.trim());
         const parentFor = fragments[0].toLowerCase();
         const text = fragments[0];
         const className = getClassName(text);
@@ -60,7 +59,7 @@ export default {
         const title = fragments[2];
         const view = fragments[3];
         const childItems = SubmenuItemsArray.filter(
-          link => link.parent === parentFor
+          (link) => link.parent === parentFor
         );
 
         const menuItem = {
@@ -69,7 +68,7 @@ export default {
           icon,
           title,
           view,
-          childItems
+          childItems,
         };
         menuItemsArray.push(menuItem);
       });
@@ -78,13 +77,14 @@ export default {
 
       this.setProperties({
         menuItems: menuItemsArray,
-        showCaret
+        showCaret,
       });
     } catch (error) {
-      console.error(error);
+      // eslint-disable-next-line no-console
       console.error(
+        error,
         "There's an issue in the Header Submenus Component. Check if your settings are entered correctly"
       );
     }
-  }
+  },
 };
