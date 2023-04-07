@@ -11,10 +11,6 @@ $item-height: 40px;
     top: $item-height;
   }
 
-  #main-outlet {
-    padding-top: calc(1.8em + #{$item-height});
-  }
-
   // need to include the menu height in the header offset
   // then update the header offset where used in core for sidebar and chat
   :root {
