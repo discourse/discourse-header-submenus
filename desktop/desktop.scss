@@ -1,8 +1,8 @@
 $item-height: 40px;
 
 @if $Fixed_mode == "true" {
-  .top-menu {
-    position: fixed;
+  .header-submenus {
+    position: sticky;
     top: 0;
     z-index: z("header") + 1;
   }
@@ -13,6 +13,28 @@ $item-height: 40px;
 
   #main-outlet {
     padding-top: calc(1.8em + #{$item-height});
+  }
+
+  // need to include the menu height in the header offset
+  // then update the header offset where used in core for sidebar and chat
+  :root {
+    --header-offset-with-submenu: calc(
+      var(--header-offset, 0px) + #{$item-height}
+    );
+  }
+
+  .sidebar-wrapper {
+    top: var(--header-offset-with-submenu);
+    height: calc(100vh - var(--header-offset-with-submenu, 0px));
+  }
+
+  html.has-full-page-chat body #main-outlet {
+    max-height: calc(
+      var(--chat-vh, 1vh) *
+        100 -
+        var(--header-offset-with-submenu, 0px) -
+        var(--composer-height, 0px)
+    );
   }
 }
 
