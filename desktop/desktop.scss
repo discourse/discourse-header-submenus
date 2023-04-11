@@ -24,6 +24,16 @@ $item-height: 40px;
     height: calc(100vh - var(--header-offset-with-submenu, 0px));
   }
 
+  .topic-post.sticky-avatar .topic-avatar {
+    top: calc(var(--header-offset-with-submenu) - 0.25em);
+  }
+
+  @media screen and (min-width: 925px) {
+    .container.posts .topic-navigation {
+      top: calc(var(--header-offset-with-submenu) + 2em);
+    }
+  }
+
   html.has-full-page-chat body #main-outlet {
     max-height: calc(
       var(--chat-vh, 1vh) *
