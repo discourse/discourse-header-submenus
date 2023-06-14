@@ -90,7 +90,7 @@ $icon-opacity: 0.7;
   .d-dropdown-menu {
     min-width: 160px;
     background: fallback($Submenu_background, $secondary);
-    box-shadow: shadow("menu-panel");
+    box-shadow: var(--shadow-menu-panel);
     margin: 0;
     list-style: none;
   }
