@@ -1,5 +1,6 @@
 {
-  "name": "Header submenus",
+  "name": "Header Submenus",
   "component": true,
+  "about_url": "https://meta.discourse.org/t/header-submenus/94584",
   "license_url": "https://github.com/discourse/discourse-header-submenus/blob/main/LICENSE"
 }
