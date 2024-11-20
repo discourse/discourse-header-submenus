@@ -3,7 +3,7 @@
     <div class="menu-placeholder">
       <div class="menu-item-container">
         <div class="menu-items">
-          {{#each menuItems as |item|}}
+          {{#each this.menuItems as |item|}}
             <a
               class="menu-item {{item.view}} {{item.className}}"
               title={{item.title}}
@@ -14,7 +14,7 @@
 
               {{item.text}}
 
-              {{#if showCaret}}
+              {{#if this.showCaret}}
                 {{d-icon "caret-right"}}
               {{/if}}
 
