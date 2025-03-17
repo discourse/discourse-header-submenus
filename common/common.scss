@@ -41,9 +41,11 @@ $icon-opacity: 0.7;
       background: fallback($Menu_item-active_background, $primary-low);
       color: fallback($Menu-item-active-color, $primary);
       cursor: default;
+
       .d-icon-caret-right {
         transform: rotate(90deg);
       }
+
       .d-header-dropdown {
         display: block;
         top: $item-height;
@@ -76,7 +78,7 @@ $icon-opacity: 0.7;
       transition: transform 0.15s ease-in-out;
 
       .rtl & {
-        margin-left: 0em;
+        margin-left: 0;
         margin-right: 0.25em;
       }
     }
@@ -117,6 +119,7 @@ $icon-opacity: 0.7;
   .d-icon {
     opacity: $icon-opacity;
     min-width: 1em;
+
     &:not(.d-icon-caret-right) {
       margin-right: 0.5em;
 
