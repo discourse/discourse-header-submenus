@@ -1,8 +1,8 @@
 import { module, test } from "qunit";
-import migrate from "../../../../migrations/settings/0001-migrate-from-deprecated-icon-names";
+import migrate from "../../../../migrations/settings/0002-migrate-from-deprecated-icon-names";
 
 module(
-  "Unit | Migrations | Settings | 0001-migrate-from-deprecated-icon-names",
+  "Unit | Migrations | Settings | 0002-migrate-from-deprecated-icon-names",
   function () {
     test("migrate icon names in Menu_items", function (assert) {
       const settings = new Map(
